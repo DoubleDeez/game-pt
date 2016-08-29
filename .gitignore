@@ -1,1 +1,5 @@
 *.fscache
+*~
+Thumbs.db
+.directory
+.DS_Store

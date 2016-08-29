@@ -6,11 +6,11 @@ export(Texture) var TerrainSprite
 
 var Center = Vector2(0, 0)
 
-func _ready():
+func GenerateTerrain():
 	if TerrainSprite != null:
 		var TileSize = TerrainSprite.get_width()
 		var TerrainHalfSize = TerrainSize * TileSize / 2
-		var Center = Vector2(TerrainHalfSize, TerrainHalfSize)
+		Center = Vector2(TerrainHalfSize, TerrainHalfSize)
 		
 		var TilePos = Vector2(0, 0)
 		for y in range(TerrainSize):
