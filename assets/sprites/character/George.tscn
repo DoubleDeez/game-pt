@@ -1,13 +1,38 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=4 format=1]
 
-[ext_resource path="res://assets/sprites/character/george.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://scripts/George.gd" type="Script" id=2]
+[ext_resource path="res://scripts/George.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/character/george.png" type="Texture" id=2]
 
-[node name="CharacterSprite" type="AnimatedSprite"]
+[sub_resource type="CircleShape2D" id=1]
 
-frames = ExtResource( 1 )
-animation = "Down_idle"
-script/script = ExtResource( 2 )
-MoveSpeed = 50
+custom_solver_bias = 0.0
+radius = 18.0
+
+[node name="KinematicBody2D" type="KinematicBody2D"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -0.527039, 1.58112 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+MoveSpeed = 100
+AnimationFPS = 7
+CharacterNode = NodePath("Sprite")
+
+[node name="Sprite" type="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+vframes = 4
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( -0.527039, 1.58112 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
 
 
