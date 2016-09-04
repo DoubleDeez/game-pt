@@ -30,7 +30,7 @@ func _process(delta):
 	ProcessInput()
 	ProcessMovement(delta)
 	if DeltaPos.length_squared() != 0 || PrevDeltaPos.length_squared() != 0:
-		DetermineDirection(PrevDeltaPos)
+		DetermineIsMoving()
 		ProcessAnimation(delta)
 	
 func ProcessInput():
@@ -43,12 +43,16 @@ func ProcessInput_Actions():
 		
 func ProcessInput_Movement():
 	if Input.is_action_pressed("character_move_up"):
+		CharacterDirection = DIRECTION.N
 		DeltaPos.y -= MoveSpeed
 	if Input.is_action_pressed("character_move_down"):
+		CharacterDirection = DIRECTION.S
 		DeltaPos.y += MoveSpeed
 	if Input.is_action_pressed("character_move_left"):
+		CharacterDirection = DIRECTION.W
 		DeltaPos.x -= MoveSpeed
 	if Input.is_action_pressed("character_move_right"):
+		CharacterDirection = DIRECTION.E
 		DeltaPos.x += MoveSpeed
 	
 func ProcessMovement(delta):
@@ -59,22 +63,8 @@ func ProcessMovement(delta):
 		DeltaPos = normal.slide(DeltaPos)
 		move(motion)
 		
-func DetermineDirection(PrevDeltaPos):
-	var DirectionVector = DeltaPos
-	IsCharacterMoving = true
-	# determine if moving
-	if DirectionVector.length_squared() == 0:
-		DirectionVector = PrevDeltaPos
-		IsCharacterMoving = false
-	# Set direction based on DirectionVector
-	if DirectionVector.x > 0:
-		CharacterDirection = DIRECTION.E
-	elif DirectionVector.y < 0:
-		CharacterDirection = DIRECTION.N
-	elif DirectionVector.x < 0:
-		CharacterDirection = DIRECTION.W
-	elif DirectionVector.y > 0:
-		CharacterDirection = DIRECTION.S
+func DetermineIsMoving():
+	IsCharacterMoving = DeltaPos.length_squared() != 0
 	
 func ProcessAnimation(delta):
 	if CharacterSprite != null:

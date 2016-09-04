@@ -337,6 +337,7 @@ frame = 20
 
 [node name="StaticBody2D1" type="StaticBody2D" parent="Rock"]
 
+editor/display_folded = true
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0.225136, -2.39653 )
