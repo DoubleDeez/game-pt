@@ -1,28 +1,373 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=3 format=1]
 
 [ext_resource path="res://levels/tileset.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 12.8196, 10.86 )
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Grass" type="Sprite" parent="."]
 
+visibility/visible = false
 texture = ExtResource( 1 )
-vframes = 7
-hframes = 7
+vframes = 5
+hframes = 8
 frame = 18
+
+[node name="Grass_Alt" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 17
 
 [node name="Stone" type="Sprite" parent="."]
 
+visibility/visible = false
 texture = ExtResource( 1 )
-vframes = 7
-hframes = 7
+vframes = 5
+hframes = 8
+frame = 19
+
+[node name="Water_Open" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 29
+
+[node name="Water_Closed" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 24
+
+[node name="Water_Closed_Left" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 28
+
+[node name="Water_Closed_Right" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 30
+
+[node name="Water_Closed_Up" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 26
+
+[node name="Water_Closed_Down" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 32
+
+[node name="Water_Open_Left" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 36
+
+[node name="Water_Open_Right" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 34
+
+[node name="Water_Open_Up" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 39
+
+[node name="Water_Open_Down" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 37
+
+[node name="Water_Open_Top_Down" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 38
+
+[node name="Water_Open_Left_Right" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 35
+
+[node name="Water_Open_Down_Right" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 25
+
+[node name="Water_Open_Down_Left" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 27
+
+[node name="Water_Open_Up_Right" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+flip_v = true
+vframes = 5
+hframes = 8
+frame = 31
+
+[node name="Water_Open_Up_Left" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 33
+
+[node name="Tilled_Closed" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+
+[node name="Tilled_Open" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 5
+
+[node name="Tilled_Closed_Left" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 4
+
+[node name="Tilled_Closed_Right" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 6
+
+[node name="Tilled_Closed_Up" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 2
+
+[node name="Tilled_Closed_Down" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 8
+
+[node name="Tilled_Open_Left" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
 frame = 12
 
-[node name="Lava" type="Sprite" parent="."]
+[node name="Tilled_Open_Right" type="Sprite" parent="."]
 
+visibility/visible = false
 texture = ExtResource( 1 )
-vframes = 7
-hframes = 7
+vframes = 5
+hframes = 8
+frame = 10
+
+[node name="Tilled_Open_Up" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 15
+
+[node name="Tilled_Open_Down" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
 frame = 13
+
+[node name="Tilled_Open_Top_Down" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 14
+
+[node name="Tilled_Open_Left_Right" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 11
+
+[node name="Tilled_Open_Down_Right" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 1
+
+[node name="Tilled_Open_Down_Left" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 3
+
+[node name="Tilled_Open_Up_Right" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 7
+
+[node name="Tilled_Open_Up_Left" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 9
+
+[node name="Watered_Dirt" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 16
+
+[node name="Stick" type="Sprite" parent="."]
+
+editor/display_folded = true
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 21
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Stick"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -0.33638, -1.32455 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stick/StaticBody2D"]
+
+transform/pos = Vector2( -0.33638, -1.32455 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Rock" type="Sprite" parent="."]
+
+editor/display_folded = true
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 20
+
+[node name="StaticBody2D1" type="StaticBody2D" parent="Rock"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0.225136, -2.39653 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock/StaticBody2D1"]
+
+transform/pos = Vector2( 0.225136, -2.39653 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Seeds" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 22
+
+[node name="Seedling" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 8
+frame = 23
 
 

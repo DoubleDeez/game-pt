@@ -20,13 +20,7 @@ collision/margin = 0.08
 script/script = ExtResource( 1 )
 MoveSpeed = 100
 AnimationFPS = 7
-CharacterNode = NodePath("Sprite")
-
-[node name="Sprite" type="Sprite" parent="."]
-
-texture = ExtResource( 2 )
-vframes = 4
-hframes = 4
+CharacterNode = NodePath("CollisionShape2D/Sprite")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
@@ -34,5 +28,12 @@ transform/pos = Vector2( -0.527039, 1.58112 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
+
+[node name="Sprite" type="Sprite" parent="CollisionShape2D"]
+
+transform/pos = Vector2( -0.527038, -1.58112 )
+texture = ExtResource( 2 )
+vframes = 4
+hframes = 4
 
 
