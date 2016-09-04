@@ -44,8 +44,9 @@ func AreExportVarsValid():
 		
 func PerformTileMapAction(WorldPosition, ActionType):
 	for TileMap in TileMaps:
-		var TileID = TileMap.get_cellv(TileMap.world_to_map(WorldPosition))
-		if TileID != -1 && TileMap.PerformAction(TileID, ActionType):
+		var TilePos = TileMap.world_to_map(WorldPosition)
+		var TileID = TileMap.get_cellv(TilePos)
+		if TileID != -1 && TileMap.has_method("PerformAction") && TileMap.PerformAction(TilePos, TileID, ActionType):
 			return
 		
 func OnCharacterAction(character, ActionType):
