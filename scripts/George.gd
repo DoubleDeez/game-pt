@@ -5,6 +5,8 @@ export var MoveSpeed = 50
 export var AnimationFPS = 5
 export(NodePath) var CharacterNode
 
+signal CharacterActionSignal
+
 const DIRECTION = {"S":0, "W":1, "N":2, "E":3}
 
 var DeltaPos = Vector2(0, 0)
@@ -32,6 +34,14 @@ func _process(delta):
 		ProcessAnimation(delta)
 	
 func ProcessInput():
+	ProcessInput_Movement()
+	ProcessInput_Actions()
+		
+func ProcessInput_Actions():
+	if Input.is_action_just_pressed("character_action_main"):
+		emit_signal("CharacterActionSignal", self, "Generic")
+		
+func ProcessInput_Movement():
 	if Input.is_action_pressed("character_move_up"):
 		DeltaPos.y -= MoveSpeed
 	if Input.is_action_pressed("character_move_down"):
