@@ -3,16 +3,17 @@
 [ext_resource path="res://scripts/George.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/character/george.png" type="Texture" id=2]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=1]
 
 custom_solver_bias = 0.0
-radius = 18.0
+radius = 3.0
+height = 10.0
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, -0.527039, 1.58112 )
+shapes/0/transform = Matrix32( -4.37114e-08, -1, 1, -4.37114e-08, 0.317596, 1.30546 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -20,18 +21,19 @@ collision/margin = 0.08
 script/script = ExtResource( 1 )
 MoveSpeed = 100
 AnimationFPS = 7
-CharacterNode = NodePath("CollisionShape2D/Sprite")
+CharacterNode = NodePath("Sprite")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
-transform/pos = Vector2( -0.527039, 1.58112 )
+transform/pos = Vector2( 0.317596, 1.30546 )
+transform/rot = 90.0
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
-[node name="Sprite" type="Sprite" parent="CollisionShape2D"]
+[node name="Sprite" type="Sprite" parent="."]
 
-transform/pos = Vector2( -0.527038, -1.58112 )
+transform/pos = Vector2( -0.5, -15.8112 )
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 4

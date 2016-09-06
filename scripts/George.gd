@@ -29,18 +29,28 @@ func _process(delta):
 	DeltaPos = Vector2(0, 0)
 	ProcessInput()
 	ProcessMovement(delta)
-	if DeltaPos.length_squared() != 0 || PrevDeltaPos.length_squared() != 0:
-		DetermineIsMoving()
-		ProcessAnimation(delta)
-	
+	DetermineIsMoving()
+	ProcessAnimation(delta)
+
 func ProcessInput():
 	ProcessInput_Movement()
 	ProcessInput_Actions()
-		
+
 func ProcessInput_Actions():
 	if Input.is_action_just_pressed("character_action_main"):
-		emit_signal("CharacterActionSignal", self, "Generic")
-		
+		var ActionPosition = get_pos()
+		if CharacterDirection == DIRECTION.S:
+			ActionPosition.y += TileSize
+		elif CharacterDirection == DIRECTION.N:
+			ActionPosition.y -= TileSize
+		elif CharacterDirection == DIRECTION.E:
+			ActionPosition.x += TileSize
+		elif CharacterDirection == DIRECTION.W:
+			ActionPosition.x -= TileSize
+		# play tool animation for character direction
+		# if no event, try tilemap collision:
+#		emit_signal("CharacterActionSignal", self, "Generic")
+
 func ProcessInput_Movement():
 	if Input.is_action_pressed("character_move_up"):
 		CharacterDirection = DIRECTION.N
@@ -54,7 +64,7 @@ func ProcessInput_Movement():
 	if Input.is_action_pressed("character_move_right"):
 		CharacterDirection = DIRECTION.E
 		DeltaPos.x += MoveSpeed
-	
+
 func ProcessMovement(delta):
 	var motion = move(DeltaPos * delta)
 	if (is_colliding()):
@@ -62,10 +72,10 @@ func ProcessMovement(delta):
 		motion = normal.slide(motion)
 		DeltaPos = normal.slide(DeltaPos)
 		move(motion)
-		
+
 func DetermineIsMoving():
 	IsCharacterMoving = DeltaPos.length_squared() != 0
-	
+
 func ProcessAnimation(delta):
 	if CharacterSprite != null:
 		if IsCharacterMoving:

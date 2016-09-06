@@ -1,0 +1,76 @@
+[gd_scene load_steps=7 format=1]
+
+[ext_resource path="res://gameplay/RawMaterials/Rock/rock.png" type="Texture" id=1]
+[ext_resource path="res://gameplay/RawMaterials/Rock/Rock.gd" type="Script" id=2]
+[ext_resource path="res://gameplay/RawMaterials/Rock/rockcracked.png" type="Texture" id=3]
+[ext_resource path="res://gameplay/RawMaterials/Rock/rockcrackedfinal.png" type="Texture" id=4]
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 5.0
+height = 15.0
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 12, 12.4545 )
+
+[node name="GameObject" type="Node2D"]
+
+transform/pos = Vector2( 0, -6 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( -1, 29 )
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( -4.37114e-08, -1, 1, -4.37114e-08, 1.5, -26 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+
+transform/pos = Vector2( 1.5, -26 )
+transform/rot = 90.0
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Area2D" type="Area2D" parent="."]
+
+editor/display_folded = true
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 0.846154, 1, -1.92308 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+
+transform/pos = Vector2( 1, -1.92308 )
+transform/scale = Vector2( 1, 0.846154 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Sprite" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+script/script = ExtResource( 2 )
+ActionArea = null
+RockSprite0 = ExtResource( 1 )
+RockSprite1 = ExtResource( 3 )
+RockSprite2 = ExtResource( 4 )
+MaxHealth = 100
+
+

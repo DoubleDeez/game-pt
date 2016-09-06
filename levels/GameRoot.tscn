@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://scripts/GameRoot.gd" type="Script" id=1]
 [ext_resource path="res://levels/tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://scripts/TileMapActions.gd" type="Script" id=3]
-[ext_resource path="res://assets/sprites/character/George.tscn" type="PackedScene" id=4]
+[ext_resource path="res://gameplay/RawMaterials/Rock/Rock.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/sprites/character/George.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -17,7 +18,6 @@ TileSize = 32
 CameraNodePath = NodePath("Camera2D")
 CharacterNodePath = NodePath("TileMap_Main/TileMap_Character/George")
 TileMapCharacterNodePath = NodePath("TileMap_Main/TileMap_Character")
-TileMapCropsNodePath = NodePath("TileMap_Main/TileMap_Crops")
 TileMapModifierNodePath = NodePath("TileMap_Main/TileMap_Modifier")
 TileMapMainNodePath = NodePath("TileMap_Main")
 TileMapBackgroundNodePath = NodePath("TileMap_Main/TileMap_Background")
@@ -68,7 +68,6 @@ _update_shape_index = 0
 [node name="TileMap_Background" type="TileMap" parent="TileMap_Main"]
 
 visibility/behind_parent = true
-transform/scale = Vector2( 1, 1 )
 mode = 0
 tile_set = ExtResource( 2 )
 cell/size = Vector2( 32, 32 )
@@ -105,25 +104,6 @@ occluder/light_mask = 1
 tile_data = IntArray( -65543, 21, -7, 21, -6, 21, -5, 21, 65530, 21, 131067, 21, 196598, 21, 196599, 21, 196600, 21, 262135, 21, 262137, 21, 327670, 21, 327671, 21 )
 script/script = ExtResource( 3 )
 
-[node name="TileMap_Crops" type="TileMap" parent="TileMap_Main"]
-
-mode = 0
-tile_set = ExtResource( 2 )
-cell/size = Vector2( 32, 32 )
-cell/quadrant_size = 16
-cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-cell/half_offset = 2
-cell/tile_origin = 0
-cell/y_sort = false
-collision/use_kinematic = false
-collision/friction = 1.0
-collision/bounce = 0.0
-collision/layers = 1
-collision/mask = 1
-occluder/light_mask = 1
-tile_data = IntArray( -65543, 24, -7, 25, -6, 24, -5, 25, 65530, 24, 131067, 25, 196598, 24, 196599, 25, 196600, 24, 262135, 24, 262137, 24, 327670, 25, 327671, 25 )
-script/script = ExtResource( 3 )
-
 [node name="TileMap_Character" type="TileMap" parent="TileMap_Main"]
 
 mode = 0
@@ -140,10 +120,14 @@ collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
-tile_data = IntArray( -655373, 22, -655370, 23, -655368, 22, -655365, 23, -720895, 23, -720893, 22, -720891, 22, -589831, 22, -589827, 22, -655356, 23, -524301, 23, -589823, 23, -589821, 22, -458762, 23, -458757, 23, -524282, 22, -393228, 22, -393225, 23, -458750, 23, -458747, 23, -327685, 22, -131071, 23, -131070, 22, -131067, 23, -65532, 22, -65529, 23, 1, 22, 3, 23, 6, 22, 131073, 23, 196608, 22, 196611, 23, 196613, 23, 196615, 23, 262145, 22, 262149, 22 )
+tile_data = IntArray(  )
 script/script = ExtResource( 3 )
 
-[node name="George" parent="TileMap_Main/TileMap_Character" instance=ExtResource( 4 )]
+[node name="Sprite" parent="TileMap_Main/TileMap_Character" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 20, -149 )
+
+[node name="George" parent="TileMap_Main/TileMap_Character" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( -48, -212 )
 
