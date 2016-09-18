@@ -4,23 +4,31 @@ extends KinematicBody2D
 export var MoveSpeed = 50
 export var AnimationFPS = 5
 export(NodePath) var CharacterNode
+export(NodePath) var ToolAnimatorNode
 
 signal CharacterActionSignal
 
 const DIRECTION = {"S":0, "W":1, "N":2, "E":3}
+const DIRECTION_ARRAY = ["S", "W", "N", "E"]
 
 var DeltaPos = Vector2(0, 0)
 var CharacterDirection = DIRECTION.S
 var IsCharacterMoving = false
 var SpriteAnimationFrame = 0
-var CharacterSprite
 var TimeSinceFrameUpdate = 0
+var ToolName = "Pickaxe"
+
+var Constants
+var CharacterSprite
+var ToolAnimator
 
 func _ready():
 	if CharacterNode != null:
 		CharacterSprite = get_node(CharacterNode)
 	else:
-		print("Geroge::_ready - CharacterNode is null")
+		print("George::_ready - CharacterNode is null")
+	Constants = get_node("/root/Constants")
+	ToolAnimator = get_node(ToolAnimatorNode)
 	set_process(true)
 
 func _process(delta):
@@ -40,14 +48,17 @@ func ProcessInput_Actions():
 	if Input.is_action_just_pressed("character_action_main"):
 		var ActionPosition = get_pos()
 		if CharacterDirection == DIRECTION.S:
-			ActionPosition.y += TileSize
+			ActionPosition.y += Constants.TILE_SIZE
 		elif CharacterDirection == DIRECTION.N:
-			ActionPosition.y -= TileSize
+			ActionPosition.y -= Constants.TILE_SIZE
 		elif CharacterDirection == DIRECTION.E:
-			ActionPosition.x += TileSize
+			ActionPosition.x += Constants.TILE_SIZE
 		elif CharacterDirection == DIRECTION.W:
-			ActionPosition.x -= TileSize
-		# play tool animation for character direction
+			ActionPosition.x -= Constants.TILE_SIZE
+		
+		var AnimationName = ToolName + "_" + DIRECTION_ARRAY[CharacterDirection]
+		if ToolAnimator != null && ToolAnimator.has_animation(AnimationName):
+			ToolAnimator.play(AnimationName)
 		# if no event, try tilemap collision:
 #		emit_signal("CharacterActionSignal", self, "Generic")
 

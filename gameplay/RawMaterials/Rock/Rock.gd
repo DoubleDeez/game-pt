@@ -10,7 +10,7 @@ export var MaxHealth = 100
 var Health
 
 func _ready():
-	get_node(ActionArea).connect("area_enter", self, TryActioning)
+	get_node(ActionArea).connect("area_enter", self, "TryActioning")
 	Health = MaxHealth
 	set_texture(RockSprite0)
 

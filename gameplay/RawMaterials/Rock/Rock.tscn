@@ -67,7 +67,7 @@ _update_shape_index = 0
 
 texture = ExtResource( 1 )
 script/script = ExtResource( 2 )
-ActionArea = null
+ActionArea = NodePath("../Area2D")
 RockSprite0 = ExtResource( 1 )
 RockSprite1 = ExtResource( 3 )
 RockSprite2 = ExtResource( 4 )
