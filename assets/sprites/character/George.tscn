@@ -1,14 +1,59 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=10 format=1]
 
 [ext_resource path="res://scripts/George.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/character/george.png" type="Texture" id=2]
-[ext_resource path="res://gameplay/Tools/stonepickaxespritesheet.png" type="Texture" id=3]
+[ext_resource path="res://gameplay/Tools/Pickaxe/stonepickaxespritesheet.png" type="Texture" id=3]
+[ext_resource path="res://gameplay/Tools/Pickaxe/StonePickaxe.gd" type="Script" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
 custom_solver_bias = 0.0
 radius = 2.70924
 height = 18.6108
+
+[sub_resource type="Animation" id=4]
+
+resource/name = "Pickaxe_E"
+length = 0.3
+loop = false
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Tool/RightTool:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 6, 7, 8, 9, 10, 11 ] }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Tool/RightTool:visibility/visible")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = { "times":FloatArray( 0, 0.3 ), "transitions":FloatArray( 1, 1 ), "update":1, "values":[ true, false ] }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Tool/RightTool/Area2D:monitorable")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = { "times":FloatArray( 0.1, 0.25 ), "transitions":FloatArray( 1, 1 ), "update":1, "values":[ true, false ] }
+
+[sub_resource type="Animation" id=5]
+
+resource/name = "Pickaxe_S"
+length = 0.3
+loop = false
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Tool/DownTool:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 0, 1, 2, 3, 4, 5 ] }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Tool/DownTool:visibility/visible")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = { "times":FloatArray( 0, 0.3 ), "transitions":FloatArray( 1, 1 ), "update":1, "values":[ true, false ] }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Tool/DownTool/Area2D:monitorable")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = { "times":FloatArray( 0.15, 0.25 ), "transitions":FloatArray( 1, 1 ), "update":1, "values":[ true, false ] }
 
 [sub_resource type="Animation" id=2]
 
@@ -26,6 +71,17 @@ tracks/1/path = NodePath("Tool/LeftTool:visibility/visible")
 tracks/1/interp = 1
 tracks/1/imported = false
 tracks/1/keys = { "times":FloatArray( 0, 0.3 ), "transitions":FloatArray( 1, 1 ), "update":1, "values":[ true, false ] }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Tool/LeftTool/Area2D:monitorable")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = { "times":FloatArray( 0.1, 0.25 ), "transitions":FloatArray( 1, 1 ), "update":1, "values":[ true, false ] }
+
+[sub_resource type="CapsuleShape2D" id=3]
+
+custom_solver_bias = 0.0
+radius = 1.97873
+height = 8.33586
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 
@@ -56,13 +112,14 @@ transform/pos = Vector2( -0.5, -15.8112 )
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 4
-frame = 1
 
 [node name="ToolAnimator" type="AnimationPlayer" parent="."]
 
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
+anims/Pickaxe_E = SubResource( 4 )
+anims/Pickaxe_S = SubResource( 5 )
 anims/Pickaxe_W = SubResource( 2 )
 playback/active = true
 playback/speed = 1.0
@@ -73,11 +130,98 @@ autoplay = ""
 
 [node name="LeftTool" type="Sprite" parent="Tool"]
 
+editor/display_folded = true
 visibility/visible = false
 transform/pos = Vector2( -6.58798, -13.4395 )
 texture = ExtResource( 3 )
 vframes = 2
 hframes = 6
+frame = 6
+script/script = ExtResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="Tool/LeftTool"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 0.866025, -0.5, 0.5, 0.866026, -17.3923, 17.6558 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tool/LeftTool/Area2D"]
+
+transform/pos = Vector2( -17.3923, 17.6558 )
+transform/rot = 30.0
+transform/scale = Vector2( 1, 1 )
+shape = SubResource( 3 )
+trigger = false
+_update_shape_index = 0
+
+[node name="RightTool" type="Sprite" parent="Tool"]
+
+editor/display_folded = true
+visibility/visible = false
+transform/pos = Vector2( 3.95279, -12.9125 )
+texture = ExtResource( 3 )
+flip_h = true
+vframes = 2
+hframes = 6
 frame = 11
+script/script = ExtResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="Tool/RightTool"]
+
+transform/pos = Vector2( -10.5408, -0.527024 )
+input/pickable = true
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 0.866025, 0.5, -0.5, 0.866026, 28.1966, 16.8653 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tool/RightTool/Area2D"]
+
+transform/pos = Vector2( 28.1966, 16.8653 )
+transform/rot = -30.0
+transform/scale = Vector2( 1, 1 )
+shape = SubResource( 3 )
+trigger = false
+_update_shape_index = 0
+
+[node name="DownTool" type="Sprite" parent="Tool"]
+
+visibility/visible = false
+transform/pos = Vector2( 7.11502, -16.0747 )
+texture = ExtResource( 3 )
+vframes = 2
+hframes = 6
+frame = 3
+script/script = ExtResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="Tool/DownTool"]
+
+transform/pos = Vector2( -2.37164, 66.1435 )
+input/pickable = true
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 4.47984, -52.9675 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tool/DownTool/Area2D"]
+
+transform/pos = Vector2( 4.47984, -52.9675 )
+transform/scale = Vector2( 1, 1 )
+shape = SubResource( 3 )
+trigger = false
+_update_shape_index = 0
 
 

@@ -64,7 +64,7 @@ func TryPerformObjectAction(ActionPos, ActionType, Actioner):
 					return true
 	return false
 
-func OnCharacterAction(Character, ActionType):
+func OnCharacterAction(Character, ActionType, ActionPosition):
 	var DIRECTION = Character.DIRECTION
 	var CharacterDirection = Character.CharacterDirection
 	var ActionPosition = Character.get_pos()

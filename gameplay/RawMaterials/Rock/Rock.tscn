@@ -14,7 +14,7 @@ height = 15.0
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 12, 12.4545 )
+extents = Vector2( 12, 8.46972 )
 
 [node name="GameObject" type="Node2D"]
 
@@ -26,7 +26,7 @@ editor/display_folded = true
 transform/pos = Vector2( -1, 29 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( -4.37114e-08, -1, 1, -4.37114e-08, 1.5, -26 )
+shapes/0/transform = Matrix32( -4.37114e-08, -1, 1, -4.37114e-08, 0.42453, -28.1509 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -37,7 +37,7 @@ bounce = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 
-transform/pos = Vector2( 1.5, -26 )
+transform/pos = Vector2( 0.42453, -28.1509 )
 transform/rot = 90.0
 shape = SubResource( 1 )
 trigger = false
@@ -46,9 +46,10 @@ _update_shape_index = 0
 [node name="Area2D" type="Area2D" parent="."]
 
 editor/display_folded = true
+transform/pos = Vector2( -0.71698, 2.8679 )
 input/pickable = false
 shapes/0/shape = SubResource( 2 )
-shapes/0/transform = Matrix32( 1, 0, 0, 0.846154, 1, -1.92308 )
+shapes/0/transform = Matrix32( 1, 0, 0, 0.846154, -0.0754395, -4.4325 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -57,7 +58,7 @@ angular_damp = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 
-transform/pos = Vector2( 1, -1.92308 )
+transform/pos = Vector2( -0.0754395, -4.4325 )
 transform/scale = Vector2( 1, 0.846154 )
 shape = SubResource( 2 )
 trigger = false
@@ -65,6 +66,7 @@ _update_shape_index = 0
 
 [node name="Sprite" type="Sprite" parent="."]
 
+transform/pos = Vector2( -0.647064, -4.49454 )
 texture = ExtResource( 1 )
 script/script = ExtResource( 2 )
 ActionArea = NodePath("../Area2D")

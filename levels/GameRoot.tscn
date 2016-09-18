@@ -84,6 +84,7 @@ script/script = ExtResource( 3 )
 
 [node name="TileMap_Modifier" type="TileMap" parent="TileMap_Main"]
 
+transform/pos = Vector2( -19.7468, 0 )
 mode = 0
 tile_set = ExtResource( 2 )
 cell/size = Vector2( 32, 32 )
@@ -98,7 +99,7 @@ collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
-tile_data = IntArray( -65543, 21, -7, 21, -6, 21, -5, 21, 65530, 21, 131067, 21, 196598, 21, 196599, 21, 196600, 21, 262135, 21, 262137, 21, 327670, 21, 327671, 21 )
+tile_data = IntArray( -458777, 0, -65543, 21, -7, 21, -6, 21, -5, 21, 65530, 21, 131067, 21, 196598, 21, 196599, 21, 196600, 21, 262135, 21, 262137, 21, 327670, 21, 327671, 21 )
 script/script = ExtResource( 3 )
 
 [node name="TileMap_Character" type="TileMap" parent="TileMap_Main"]
@@ -123,6 +124,34 @@ script/script = ExtResource( 3 )
 [node name="Rock" parent="TileMap_Main/TileMap_Character" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 20, -149 )
+
+[node name="Rock1" parent="TileMap_Main/TileMap_Character" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( -315.578, -8.08997 )
+
+[node name="Rock2" parent="TileMap_Main/TileMap_Character" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( -428.794, 204.497 )
+
+[node name="Rock3" parent="TileMap_Main/TileMap_Character" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( -10.9513, 211.827 )
+
+[node name="Rock4" parent="TileMap_Main/TileMap_Character" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 275.756, -384.393 )
+
+[node name="Rock5" parent="TileMap_Main/TileMap_Character" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 305.078, -134.339 )
+
+[node name="Rock6" parent="TileMap_Main/TileMap_Character" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( -271.594, -166.105 )
+
+[node name="Rock7" parent="TileMap_Main/TileMap_Character" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( -302.546, -257.33 )
 
 [node name="George" parent="TileMap_Main/TileMap_Character" instance=ExtResource( 5 )]
 

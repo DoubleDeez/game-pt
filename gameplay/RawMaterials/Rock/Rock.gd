@@ -16,21 +16,19 @@ func _ready():
 
 func TryActioning(ColliderArea):
 	var Collider = ColliderArea.get_parent()
-	if not Collider.has_method("GetToolType"):
+	if !Collider.has_method("GetToolType") || Collider.GetToolType() != "Pickaxe":
 		return
-	if Collider.GetToolType() != "Pickaxe":
-		return
-	TakeHit()
+	TakeHit(Collider.GetDamage())
 	if Health <= 0:
-		var Character = Collider.GetCharacter()
-		Character.GiveItem("Stone", 1)
+#		var Character = Collider.GetCharacter()
+#		Character.GiveItem("Stone", 1)
 		hide()
-		queue_free()
+		get_parent().queue_free()
 	else:
 		UpdateSprite()
 
-func TakeHit():
-	Health -= 34
+func TakeHit(Damage):
+	Health -= Damage
 	
 func UpdateSprite():
 	if Health < 40:

@@ -45,7 +45,12 @@ func ProcessInput():
 	ProcessInput_Actions()
 
 func ProcessInput_Actions():
-	if Input.is_action_just_pressed("character_action_main"):
+	if Input.is_action_just_pressed("character_action_main"):		
+		var AnimationName = ToolName + "_" + DIRECTION_ARRAY[CharacterDirection]
+		if ToolAnimator != null && !ToolAnimator.is_playing() && ToolAnimator.has_animation(AnimationName):
+			ToolAnimator.play(AnimationName)
+		# if no event, try tilemap collision:
+			
 		var ActionPosition = get_pos()
 		if CharacterDirection == DIRECTION.S:
 			ActionPosition.y += Constants.TILE_SIZE
@@ -55,12 +60,7 @@ func ProcessInput_Actions():
 			ActionPosition.x += Constants.TILE_SIZE
 		elif CharacterDirection == DIRECTION.W:
 			ActionPosition.x -= Constants.TILE_SIZE
-		
-		var AnimationName = ToolName + "_" + DIRECTION_ARRAY[CharacterDirection]
-		if ToolAnimator != null && ToolAnimator.has_animation(AnimationName):
-			ToolAnimator.play(AnimationName)
-		# if no event, try tilemap collision:
-#		emit_signal("CharacterActionSignal", self, "Generic")
+#		emit_signal("CharacterActionSignal", self, "Generic", ActionPosition)
 
 func ProcessInput_Movement():
 	if Input.is_action_pressed("character_move_up"):
