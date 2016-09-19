@@ -143,7 +143,6 @@ transform/pos = Vector2( -0.5, -15.8112 )
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 4
-frame = 2
 
 [node name="Tool" type="Node2D" parent="Sprite"]
 
