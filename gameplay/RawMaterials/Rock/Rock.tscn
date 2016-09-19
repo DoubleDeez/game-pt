@@ -23,7 +23,7 @@ transform/pos = Vector2( 0, -6 )
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 editor/display_folded = true
-transform/pos = Vector2( -1, 29 )
+transform/pos = Vector2( -1, 33 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( -4.37114e-08, -1, 1, -4.37114e-08, 0.42453, -28.1509 )
@@ -46,7 +46,7 @@ _update_shape_index = 0
 [node name="Area2D" type="Area2D" parent="."]
 
 editor/display_folded = true
-transform/pos = Vector2( -0.71698, 2.8679 )
+transform/pos = Vector2( 0, 6 )
 input/pickable = false
 shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 0.846154, -0.0754395, -4.4325 )
@@ -66,7 +66,7 @@ _update_shape_index = 0
 
 [node name="Sprite" type="Sprite" parent="."]
 
-transform/pos = Vector2( -0.647064, -4.49454 )
+transform/pos = Vector2( 2.38419e-07, 9.53674e-07 )
 texture = ExtResource( 1 )
 script/script = ExtResource( 2 )
 ActionArea = NodePath("../Area2D")

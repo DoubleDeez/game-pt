@@ -43,14 +43,10 @@ func _process(delta):
 func ProcessInput():
 	ProcessInput_Movement()
 	ProcessInput_Actions()
-
+	ProcessInput_Tools()
+	
 func ProcessInput_Actions():
-	if Input.is_action_just_pressed("character_action_main"):		
-		var AnimationName = ToolName + "_" + DIRECTION_ARRAY[CharacterDirection]
-		if ToolAnimator != null && !ToolAnimator.is_playing() && ToolAnimator.has_animation(AnimationName):
-			ToolAnimator.play(AnimationName)
-		# if no event, try tilemap collision:
-			
+	if Input.is_action_just_pressed("character_action_main"):
 		var ActionPosition = get_pos()
 		if CharacterDirection == DIRECTION.S:
 			ActionPosition.y += Constants.TILE_SIZE
@@ -60,21 +56,31 @@ func ProcessInput_Actions():
 			ActionPosition.x += Constants.TILE_SIZE
 		elif CharacterDirection == DIRECTION.W:
 			ActionPosition.x -= Constants.TILE_SIZE
-#		emit_signal("CharacterActionSignal", self, "Generic", ActionPosition)
+		emit_signal("CharacterActionSignal", self, "Generic", ActionPosition)
+
+func ProcessInput_Tools():
+	if Input.is_action_just_pressed("character_tool_main"):
+		var AnimationName = ToolName + "_" + DIRECTION_ARRAY[CharacterDirection]
+		if ToolAnimator != null && !ToolAnimator.is_playing() && ToolAnimator.has_animation(AnimationName):
+			ToolAnimator.play(AnimationName)
+		# @TODO Handle tilling within the hoe tool
 
 func ProcessInput_Movement():
+	var NormalDelta = Vector2(0, 0)
 	if Input.is_action_pressed("character_move_up"):
 		CharacterDirection = DIRECTION.N
-		DeltaPos.y -= MoveSpeed
-	if Input.is_action_pressed("character_move_down"):
+		NormalDelta.y = -1
+	elif Input.is_action_pressed("character_move_down"):
 		CharacterDirection = DIRECTION.S
-		DeltaPos.y += MoveSpeed
+		NormalDelta.y = 1
 	if Input.is_action_pressed("character_move_left"):
 		CharacterDirection = DIRECTION.W
-		DeltaPos.x -= MoveSpeed
-	if Input.is_action_pressed("character_move_right"):
+		NormalDelta.x = -1
+	elif Input.is_action_pressed("character_move_right"):
 		CharacterDirection = DIRECTION.E
-		DeltaPos.x += MoveSpeed
+		NormalDelta.x = 1
+	# Limit diagonal speed to max speed
+	DeltaPos = NormalDelta.normalized() * MoveSpeed
 
 func ProcessMovement(delta):
 	var motion = move(DeltaPos * delta)
@@ -86,6 +92,9 @@ func ProcessMovement(delta):
 
 func DetermineIsMoving():
 	IsCharacterMoving = DeltaPos.length_squared() != 0
+	
+func GetActionArea():
+	return get_node("ActionAreas/ActionArea_" + DIRECTION_ARRAY[CharacterDirection])
 
 func ProcessAnimation(delta):
 	if CharacterSprite != null:

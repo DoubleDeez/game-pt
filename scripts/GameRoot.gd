@@ -48,13 +48,7 @@ func PerformTileMapAction(WorldPosition, ActionType):
 			return
 
 func TryPerformObjectAction(ActionPos, ActionType, Actioner):
-	# TODO grab action area from Actioner
-	var ActionAreaShape = RectangleShape2D.new()
-	ActionAreaShape.set_extents(Vector2(8, 8))
-	var ActionArea = Area2D.new()
-	ActionArea.add_shape(ActionAreaShape)
-	ActionArea.set_pos(ActionPos)
-	get_tree().get_root().add_child(ActionArea)
+	var ActionArea = Actioner.GetActionArea()
 	var CharacterTileMap = get_node(TileMapCharacterNodePath)
 	for GameObject in CharacterTileMap.get_children():
 		if GameObject.has_method("IsAreaOverlapping"):
@@ -65,16 +59,5 @@ func TryPerformObjectAction(ActionPos, ActionType, Actioner):
 	return false
 
 func OnCharacterAction(Character, ActionType, ActionPosition):
-	var DIRECTION = Character.DIRECTION
-	var CharacterDirection = Character.CharacterDirection
-	var ActionPosition = Character.get_pos()
-	if CharacterDirection == DIRECTION.S:
-		ActionPosition.y += TileSize
-	elif CharacterDirection == DIRECTION.N:
-		ActionPosition.y -= TileSize
-	elif CharacterDirection == DIRECTION.E:
-		ActionPosition.x += TileSize
-	elif CharacterDirection == DIRECTION.W:
-		ActionPosition.x -= TileSize
 	if not TryPerformObjectAction(ActionPosition, ActionType, Character):
 		PerformTileMapAction(ActionPosition, ActionType)
