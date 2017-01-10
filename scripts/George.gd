@@ -23,10 +23,8 @@ var CharacterSprite
 var ToolAnimator
 
 func _ready():
-	if CharacterNode != null:
-		CharacterSprite = get_node(CharacterNode)
-	else:
-		print("George::_ready - CharacterNode is null")
+	assert(CharacterNode != null)
+	CharacterSprite = get_node(CharacterNode)
 	Constants = get_node("/root/Constants")
 	ToolAnimator = get_node(ToolAnimatorNode)
 	set_process(true)
@@ -36,19 +34,13 @@ func _process(delta):
 	TimeSinceFrameUpdate += delta
 	var PrevDeltaPos = DeltaPos
 	DeltaPos = Vector2(0, 0)
-	InputTick(delta)
 	ProcessMovement(delta)
 	DetermineIsMoving()
 	ProcessAnimation(delta)
 
-# Process input on event
 func _input(event):
 	ProcessInput_Actions(event)
-
-# Process input every tick
-func InputTick(delta):
-	ProcessInput_Movement()
-	ProcessInput_Tools()
+	ProcessInput_Tools(event)
 	
 func ProcessInput_Actions(event):
 	if event.is_action_pressed("character_action_main"):
@@ -63,8 +55,8 @@ func ProcessInput_Actions(event):
 			ActionPosition.x -= Constants.TILE_SIZE
 		emit_signal("CharacterActionSignal", self, "Generic", ActionPosition)
 
-func ProcessInput_Tools():
-	if Input.is_action_pressed("character_tool_main"):
+func ProcessInput_Tools(event):
+	if event.is_action("character_tool_main") && event.is_pressed():
 		var AnimationName = ToolName + "_" + DIRECTION_ARRAY[CharacterDirection]
 		if ToolAnimator != null && !ToolAnimator.is_playing() && ToolAnimator.has_animation(AnimationName):
 			ToolAnimator.play(AnimationName)
@@ -88,6 +80,7 @@ func ProcessInput_Movement():
 	DeltaPos = NormalDelta.normalized() * MoveSpeed
 
 func ProcessMovement(delta):
+	ProcessInput_Movement()
 	var motion = move(DeltaPos * delta)
 	if (is_colliding()):
 		var normal = get_collision_normal()
@@ -102,13 +95,11 @@ func GetActionArea():
 	return get_node("ActionAreas/ActionArea_" + DIRECTION_ARRAY[CharacterDirection])
 
 func ProcessAnimation(delta):
-	if CharacterSprite != null:
-		if IsCharacterMoving:
-			if TimeSinceFrameUpdate >= (1.0/AnimationFPS):
-				SpriteAnimationFrame = (SpriteAnimationFrame + 1) % CharacterSprite.get_vframes()
-				TimeSinceFrameUpdate = 0
-		else:
-			SpriteAnimationFrame = 0
-		CharacterSprite.set_frame(CharacterDirection + SpriteAnimationFrame * CharacterSprite.get_vframes())
+	assert(CharacterSprite != null)
+	if IsCharacterMoving:
+		if TimeSinceFrameUpdate >= (1.0/AnimationFPS):
+			SpriteAnimationFrame = (SpriteAnimationFrame + 1) % CharacterSprite.get_vframes()
+			TimeSinceFrameUpdate = 0
 	else:
-		print("Geroge::ProcessAnimation - CharacterSprite is null")
+		SpriteAnimationFrame = 0
+	CharacterSprite.set_frame(CharacterDirection + SpriteAnimationFrame * CharacterSprite.get_vframes())

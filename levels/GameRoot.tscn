@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=1]
+[gd_scene load_steps=11 format=1]
 
 [ext_resource path="res://scripts/GameRoot.gd" type="Script" id=1]
 [ext_resource path="res://levels/tileset.tres" type="TileSet" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://gameplay/Buildings/StandingTorch/StandingTorch.tscn" type="PackedScene" id=6]
 [ext_resource path="res://gameplay/RawMaterials/Rock/Rock.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/sprites/character/George.tscn" type="PackedScene" id=8]
+[ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -206,6 +207,15 @@ transform/pos = Vector2( -302.546, -257.33 )
 [node name="George" parent="TileMap_Main/TileMap_Character" instance=ExtResource( 8 )]
 
 transform/pos = Vector2( -48, -212 )
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+
+[node name="Status" parent="HUD" instance=ExtResource( 9 )]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
