@@ -25,6 +25,7 @@ func _process(delta):
 	CameraNode.set_pos(CharacterNode.get_pos())
 
 func InitGame():
+	OS.set_target_fps(120)
 	CameraNode = get_node(CameraNodePath)
 	CameraNode.set_enable_follow_smoothing(true)
 	CharacterNode = get_node(CharacterNodePath)

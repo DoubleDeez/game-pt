@@ -30,23 +30,28 @@ func _ready():
 	Constants = get_node("/root/Constants")
 	ToolAnimator = get_node(ToolAnimatorNode)
 	set_process(true)
+	set_process_input(true)
 
 func _process(delta):
 	TimeSinceFrameUpdate += delta
 	var PrevDeltaPos = DeltaPos
 	DeltaPos = Vector2(0, 0)
-	ProcessInput()
+	InputTick(delta)
 	ProcessMovement(delta)
 	DetermineIsMoving()
 	ProcessAnimation(delta)
 
-func ProcessInput():
+# Process input on event
+func _input(event):
+	ProcessInput_Actions(event)
+
+# Process input every tick
+func InputTick(delta):
 	ProcessInput_Movement()
-	ProcessInput_Actions()
 	ProcessInput_Tools()
 	
-func ProcessInput_Actions():
-	if Input.is_action_just_pressed("character_action_main"):
+func ProcessInput_Actions(event):
+	if event.is_action_pressed("character_action_main"):
 		var ActionPosition = get_pos()
 		if CharacterDirection == DIRECTION.S:
 			ActionPosition.y += Constants.TILE_SIZE
@@ -59,7 +64,7 @@ func ProcessInput_Actions():
 		emit_signal("CharacterActionSignal", self, "Generic", ActionPosition)
 
 func ProcessInput_Tools():
-	if Input.is_action_just_pressed("character_tool_main"):
+	if Input.is_action_pressed("character_tool_main"):
 		var AnimationName = ToolName + "_" + DIRECTION_ARRAY[CharacterDirection]
 		if ToolAnimator != null && !ToolAnimator.is_playing() && ToolAnimator.has_animation(AnimationName):
 			ToolAnimator.play(AnimationName)
